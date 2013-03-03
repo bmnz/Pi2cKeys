@@ -1,12 +1,32 @@
 #Kellen Manning 2013
 #Interfacing MCP23016 to RPi I2C to uinput/gamepad which will eventually be seen by AdvMAME
 import uinput
-import 
 
 #Kellen Manning 26 FEB 2013
 class Gamepad:
     "Gamepad class keeps track of button states and emits the appropriate key presses."
     pass
+
+    previous_state = 0
+
+    events = (
+            #list of keys in /usr/include/linux/input.h
+            uinput.BTN_A,
+            uinput.BTN_B,
+            uinput.BTN_C,
+            uinput.BTN_START,
+            uinput.BTN_X, #UP
+            uinput.BTN_Y, #DOWN
+            uinput.BTN_TL, #LEFT
+            uinput.BTN_TR, #RIGHT
+            )
+    
+    device = uinput.Device(events)
+
+    #Emit_Keypress
+    #Logic to Determine whether we call Emit_Keypress
+    #Organize/Contain ALL THE Button objects! Includes logic to assign them.
+
 
 
 #Kellen Manning 23 FEB 2013
