@@ -1,4 +1,5 @@
 #Kellen Manning 2013
+#github.com/bmnz
 #Interfacing MCP23016 to RPi I2C to uinput/gamepad which will eventually be seen by AdvMAME
 import uinput
 from Adafruit_MCP230xx import Adafruit_MCP230XX
@@ -19,6 +20,7 @@ class MCP_Input:
         self.address = address
         self.num_gpios = num_gpios
         self.mcp = Adafruit_MCP230XX(address, num_gpios)
+        self.pullup_all_pins()
 
     def pullup_all_pins(self):
         "Set each gpio pin on the MCP23017 to input w/internal pullup enabled."
@@ -47,6 +49,7 @@ class MCP_Input:
     #TODO: Figure out how to create a lambda/generator function for functions
     #that perform an action over every button in this class. I shouldn't have
     #to repeat "for x in range(0,num_gpios)" so many times.
+    #TIL: You can pass functions as objects. Python is objects, duh!
 
 #Kellen Manning 26 FEB 2013
 class Gamepad:
@@ -67,11 +70,21 @@ class Gamepad:
             uinput.BTN_B,
             uinput.BTN_C,
             uinput.BTN_START,
-            uinput.BTN_FORWARD, #UP
-            uinput.BTN_BACK, #DOWN
+            uinput.BTN_FORWARD, 
+            uinput.BTN_BACK, 
             uinput.BTN_LEFT, 
             uinput.BTN_RIGHT, 
             )
+
+    eventstr = {}
+    eventstr[uinput.BTN_A] = "BTN_A" 
+    eventstr[uinput.BTN_B] = "BTN_B" 
+    eventstr[uinput.BTN_C] = "BTN_C" 
+    eventstr[uinput.BTN_START] = "BTN_START" 
+    eventstr[uinput.BTN_FORWARD] = "BTN_FORWARD"  
+    eventstr[uinput.BTN_BACK] = "BTN_BACK"  
+    eventstr[uinput.BTN_LEFT] = "BTN_LEFT"  
+    eventstr[uinput.BTN_RIGHT] = "BTN_RIGHT"  
     
     device = uinput.Device(events)
 
