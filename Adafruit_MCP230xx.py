@@ -175,6 +175,8 @@ class MCP230XX_GPIO(object):
         self.chip.output(pin, value)
     def pullup(self, pin, value):
         self.chip.pullup(pin, value)
+    def readU16(self):
+        return self.chip.readU16()
         
 
 if __name__ == '__main__':
