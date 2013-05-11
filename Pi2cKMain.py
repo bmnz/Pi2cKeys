@@ -35,8 +35,14 @@ def guided_setup(self):
         #Set pin, Set uinput_key. The strategy is to ask user to press the correct uinput_key, and determine the relevant pin.
         #Which uinput are we on? (events[x%8])
         #Ask user to press this key (evenstr[events[x%8])
-        #Make sure there is only one key pressed: http://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2
+	print("Player " + str(x%8+1) + ", press " + gamepad.eventstr[events[x%8]])
+
+	tmp = mcp.readU16()
         #Figure out which bit is set (loop, no 'hack' for this)
+	bits = [x for x in range(0,16) if (1<<x) == tmp]
+	if( len(bits) == 1):
+	    #Only one bit set
+	    #Set that bit-number as the right one
         #Assign the pin
         #User test/verify
         #Next button
